@@ -1,5 +1,5 @@
 package br.com.senacrs.alp.aulas;
 
-public interface Professor extends Pessoa, Funcionario{
+public interface Professor extends Funcionario{
 
 }
