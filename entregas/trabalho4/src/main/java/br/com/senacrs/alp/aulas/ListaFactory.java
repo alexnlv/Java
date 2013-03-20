@@ -11,10 +11,8 @@ public class ListaFactory {
 		
 		Lista<T> resultado = null;
 		
-
 	
-		
-		
+		resultado = new DesenvolvimentoDaLista();
 		//implementar
 		
 		return resultado;
