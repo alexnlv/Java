@@ -1,10 +1,14 @@
 package br.com.senacrs.alp.aulas;
 
 public class DesenvolvimentoDaLista<T> implements Lista<T> {
+	
+	private Nodo<T> inicio = new Nodo<T>();
+	
 
 	@Override
 	public void adicionarFinal(T valor) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
@@ -40,8 +44,19 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 
 	@Override
 	public int obterTamanho() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int resultado = 0;
+		Nodo<T> nodo = null;
+		
+		nodo = inicio;
+		
+		while(nodo.proximo != null){
+
+			resultado++;
+			
+		}
+				
+		return resultado;
 	}
 
 	@Override
