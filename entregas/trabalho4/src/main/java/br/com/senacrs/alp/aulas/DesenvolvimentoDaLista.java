@@ -7,39 +7,74 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 
 	@Override
 	public void adicionarFinal(T valor) {
-		
-		
-		
+			
+				
 	}
 
 	@Override
 	public void adicionarInicio(T valor) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
 	@Override
 	public void adicionarPosicao(int posicao, T valor) {
-		// TODO Auto-generated method stub
 		
+		Nodo<T> nodo = null;
+		Nodo<T> novo = new Nodo<T>();
+		
+		
+		nodo = obterNodoPosicao(posicao-1);
+		nodo.proximo = nodo.proximo
+		//novo.proximo = 
 	}
 
 	@Override
 	public T obterPrimeiro() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		T resultado = obterPosicao(0);
+		
+		return resultado;
 	}
 
 	@Override
 	public T obterUltimo() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int tamanho = obterTamanho();
+		
+		T resultado = obterPosicao (tamanho-1);
+		
+		return resultado;
 	}
 
+	private Nodo<T> obterNodoPosicao (int posicao){
+		
+		Nodo<T> nodo = inicio;
+		int indice = -1;
+		
+		while(posicao != indice) {
+			
+			nodo = nodo.proximo;
+			indice ++;			
+		}
+		
+		return nodo;
+	}
+	
 	@Override
 	public T obterPosicao(int posicao) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Nodo<T> nodo = inicio;
+		int indice = -1;
+		
+		while(posicao != indice){
+			
+			nodo = nodo.proximo;
+			indice ++;
+		}
+		
+		return nodo.conteudo;
 	}
 
 	@Override
@@ -61,13 +96,17 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 
 	@Override
 	public T removerPosicao(int posicao) {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 
 	@Override
 	public void esvaziar() {
-		// TODO Auto-generated method stub
+		
+		Nodo<T> nodo = inicio;
+		nodo.proximo = null;
 		
 	}
 
