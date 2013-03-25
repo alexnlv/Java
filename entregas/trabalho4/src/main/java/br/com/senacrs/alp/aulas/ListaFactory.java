@@ -13,8 +13,7 @@ public class ListaFactory {
 		
 	
 		resultado = new DesenvolvimentoDaLista();
-		//implementar
-		
+				
 		return resultado;
 	}
 	
