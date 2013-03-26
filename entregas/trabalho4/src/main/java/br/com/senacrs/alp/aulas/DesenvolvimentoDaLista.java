@@ -10,12 +10,7 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	@Override
 	public void adicionarFinal(T valor) {
 		
-		Nodo<T> nodo = null;
-		
-		nodo.conteudo = obterUltimo();
-		
-		nodo.conteudo = valor;
-		
+		adicionarPosicao(obterTamanho(), valor);
 		
 		
 	}
@@ -23,11 +18,7 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	@Override
 	public void adicionarInicio(T valor) {
 		
-		Nodo<T> nodo = null;
-		
-		nodo.conteudo = obterPrimeiro();
-		
-		nodo.conteudo = valor;
+		adicionarPosicao(0, valor);
 		
 	}
 
@@ -37,33 +28,20 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 		Nodo<T> anterior = null;
 		Nodo<T> novo = new Nodo<T>();
 		novo.conteudo = valor;
-		
-		if (posicao < 0){
-			
-			exception.expect(IllegalArgumentException.class);
-			
-			System.out.println("negativa");
-		}
-		
-		
-		else {
-			
-			anterior = obterNodoPosicao(posicao);
-			novo.proximo = anterior.proximo;
-			anterior.proximo = novo;
-			System.out.println("ok");
-		}
-		
+	
+		anterior = obterNodoPosicao(posicao-1);
+		novo.proximo = anterior.proximo;
+		anterior.proximo = novo;
+		novo.conteudo = valor;
 		
 	}
 
-	public ExpectedException exception = ExpectedException.none();
 	
 	@Override
 	public T obterPrimeiro() {
 		
 		Nodo <T> nodo = null;
-		nodo.conteudo = obterPosicao(0);
+		nodo = obterNodoPosicao(0);
 		
 		return nodo.conteudo;
 	}
@@ -72,13 +50,9 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	public T obterUltimo() {
 		
 		int tamanho = obterTamanho();
-		
-		Nodo <T> nodo = null;
-		
-		nodo = obterNodoPosicao (tamanho);
-		
-		T resultado = nodo.conteudo;
-				
+	
+		T resultado = obterPosicao (tamanho - 1);
+						
 		return resultado;
 	}
 
@@ -99,25 +73,10 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	@Override
 	public T obterPosicao(int posicao) {
 		
-		Nodo<T> nodo = inicio;
-		int indice = -1;
-		
-		int pos = posicao;
-		
-		if (pos < -1) {
-			
-			pos = -1;
-		}
-		
-		while(pos != indice){
-			
-			nodo = nodo.proximo;
-			indice ++;
-		}
-		
-		T resultado = nodo.conteudo;
-		
-		return resultado;
+		  Nodo<T> nodo = null;
+	        nodo = obterNodoPosicao(posicao);
+	        return nodo.conteudo;
+
 	}
 
 	@Override 
@@ -139,12 +98,11 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	@Override
 	public T removerPosicao(int posicao) {
 		
-		Nodo<T> nodoRemover = null;
-		
+		Nodo<T> nodoRemover = new Nodo<T>();
 		Nodo<T> nodo = null;
 		
-
-		nodoRemover.conteudo = obterPosicao(posicao);
+		nodoRemover = obterNodoPosicao(posicao);
+		nodo = obterNodoPosicao(posicao - 1);
 		
 		nodo.proximo = nodoRemover.proximo; 
 		nodoRemover.proximo = null;
@@ -157,8 +115,7 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 	@Override
 	public void esvaziar() {
 		
-		Nodo<T> nodo = inicio;
-		nodo.proximo = null;
+		inicio.proximo = null;
 		
 	}
 
