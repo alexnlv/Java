@@ -20,6 +20,25 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
     public void adicionarPosicao(int posicao, T valor) {
         Nodo<T> nodo = null;
         Nodo<T> nodoNovo = new Nodo<T>();
+        
+        if (valor == null) {
+        	        	
+        	throw new IllegalArgumentException();
+        
+        }
+
+        if (posicao < 0) {
+        	
+        	throw new IllegalArgumentException();
+        
+        }
+        
+        if (posicao > obterTamanho()) {
+        	
+        	throw new IllegalArgumentException();
+        
+        }
+        
         nodo = obterNodoPosicao(posicao -1);
         nodoNovo.proximo = nodo.proximo;
         nodo.proximo = nodoNovo;
@@ -28,9 +47,8 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
 
     @Override
     public T obterPrimeiro() {
-        Nodo<T> nodo = null;
-        nodo = obterNodoPosicao(0);
-        return nodo.conteudo;
+        
+    	return obterPosicao(0);
     }
 
     @Override
@@ -44,6 +62,22 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
     @Override
     public T obterPosicao(int posicao) {
         Nodo<T> nodo = null;
+        
+        if (posicao < 0) {
+        
+        	throw new IllegalArgumentException();
+        	 
+
+        }
+        	 
+
+       	if (posicao >= obterTamanho()) {
+        	 
+        	throw new IllegalArgumentException();
+        	 
+
+       	}
+          
         nodo = obterNodoPosicao(posicao);
         return nodo.conteudo;
     }
@@ -65,6 +99,27 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
     public T removerPosicao(int posicao) {
         Nodo<T> nodo = null;
         Nodo<T> nodoAnterior = new Nodo<T>();
+        
+
+
+
+
+        if (posicao < 0) {
+
+        	throw new IllegalArgumentException();
+
+        }
+ 
+
+
+        if (posicao >= obterTamanho()) {
+ 
+
+        	throw new IllegalArgumentException();
+ 
+        }
+        
+        
         nodo = obterNodoPosicao(posicao);
         nodoAnterior = obterNodoPosicao(posicao -1);
         nodoAnterior.proximo = nodo.proximo;
@@ -81,7 +136,7 @@ public class DesenvolvimentoDaLista<T> implements Lista<T> {
     private Nodo<T> obterNodoPosicao(int posicao){
         Nodo<T> nodo = inicio;
         int indice = -1;
-        while(posicao != indice){
+        while(indice != posicao){
             nodo = nodo.proximo;
             indice++;
         }
