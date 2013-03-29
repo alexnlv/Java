@@ -8,7 +8,7 @@ public class MinhaFila<T> implements Fila<T> {
 	@Override
 	public void insercao(T valor) {
 		
-		Lista.adicionarFinal(valor);
+		Lista.adicionarInicio(valor);
 		
 	}
 
@@ -28,8 +28,20 @@ public class MinhaFila<T> implements Fila<T> {
 	@Override
 	public boolean vazia() {
 		
+		boolean flag = false;
+	
+		if (Lista != null) {
+			
+			flag = true;
+		}
 		
-		return false;
+		
+		if (Lista.obterTamanho() > 0) {
+			
+			flag = false;
+		}
+		
+		return flag;
 	}
 
 	@Override
@@ -42,8 +54,8 @@ public class MinhaFila<T> implements Fila<T> {
 	@Override
 	public void esvaziar() {
 		
-		
 		Lista.esvaziar();
+		
 	}
 	
 	
