@@ -11,7 +11,8 @@ public class FilaFactory {
 		
 		Fila<T> resultado = null;
 		
-		//implementar
+		resultado = new MinhaFila();
+		
 		
 		return resultado;
 	}
