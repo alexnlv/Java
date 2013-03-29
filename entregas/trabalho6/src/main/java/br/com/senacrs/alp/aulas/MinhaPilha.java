@@ -2,29 +2,29 @@ package br.com.senacrs.alp.aulas;
 
 public class MinhaPilha<T> implements Pilha<T>{
 	
-	private Pilha<T> Pilha = 
-			PilhaFactory.getInstancia().criarPilha();
+	private Lista<T> Lista = 
+			ListaFactory.getInstancia().criarLista();
 	
 	
 
 	@Override
 	public void insercao(T valor) {
 		
-		Pilha.insercao(valor);
+		Lista.adicionarFinal(valor);
 		
 	}
 
 	@Override
 	public T obter() {
 		
-		return Pilha.obter();
+		return Lista.obterPrimeiro();
 	}
 
 	@Override
 	public T remocao() {
 		
 			
-		return Pilha.remocao();
+		return Lista.removerPosicao(tamanho() - 1);
 	}
 
 	@Override
@@ -32,13 +32,13 @@ public class MinhaPilha<T> implements Pilha<T>{
 		
 		boolean flag = false;
 		
-		if (Pilha != null) {
+		if (Lista != null) {
 			
 			flag = true;
 		}
 		
 		
-		if (Pilha.tamanho() > 0) {
+		if (Lista.obterTamanho() > 0) {
 			
 			flag = false;
 		}
@@ -49,13 +49,13 @@ public class MinhaPilha<T> implements Pilha<T>{
 	@Override
 	public int tamanho() {
 		
-		return Pilha.tamanho();
+		return Lista.obterTamanho();
 	}
 
 	@Override
 	public void esvaziar() {
 		
-		Pilha.esvaziar();
+		Lista.esvaziar();
 		
 	}
 
