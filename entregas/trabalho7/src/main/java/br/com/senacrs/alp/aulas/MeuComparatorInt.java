@@ -52,7 +52,7 @@ public class MeuComparatorInt implements Comparator<Integer>{
 	}
 	
 	
-private int compareParidadeDistinta( Integer arg0, Integer arg1) {
+	private int compareParidadeDistinta( Integer arg0, Integer arg1) {
 		
 		int resultado = 0;
 		
