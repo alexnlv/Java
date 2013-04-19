@@ -35,17 +35,12 @@ public class Factory {
 	
 		Empresa resultado = null;
 		
-		resultado = MinhaEmpresa();
+		resultado = new MinhaEmpresa(nome);
 		
 		
 		return resultado;
 	}
 	
-
-	private Empresa MinhaEmpresa() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public static Factory getInstancia() {
 		return instancia;
