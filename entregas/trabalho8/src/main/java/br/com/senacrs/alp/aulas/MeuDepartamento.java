@@ -8,7 +8,7 @@ public class MeuDepartamento implements Departamento{
 	private Empresa empresa;
 	
 	
-	public MeuDepartamento(String nome, Empresa empresa){
+	public MeuDepartamento(Empresa empresa, String nome){
 		
 		this.empresa = empresa;
 		this.nome = nome;

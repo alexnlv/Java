@@ -1,5 +1,7 @@
 package br.com.senacrs.alp.aulas;
 
+import java.io.ObjectInputStream.GetField;
+
 public class CriarMeuFuncionario implements Funcionario{
 
 	private String nome;
@@ -7,7 +9,10 @@ public class CriarMeuFuncionario implements Funcionario{
 	private Empresa empresa;
 	private double salario;
 	
-	
+	public CriarMeuFuncionario(Departamento departamento, String nome, double salario){
+		
+		
+	}
 	@Override
 	public Empresa getEmpresa() {
 		// TODO Auto-generated method stub

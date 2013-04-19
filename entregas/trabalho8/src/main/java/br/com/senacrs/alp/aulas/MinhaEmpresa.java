@@ -6,11 +6,12 @@ public class MinhaEmpresa implements Empresa{
 
 	private String nome;
 	
+	
 	public MinhaEmpresa(String nome){
 		
 		this.nome = nome;
 	}
-	
+		
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub

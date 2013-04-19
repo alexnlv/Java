@@ -21,6 +21,7 @@ public class Factory {
 		Departamento resultado = null;
 		
 		resultado = new MeuDepartamento(empresa, nome);
+		 
 		
 		return resultado;
 	}
@@ -29,13 +30,13 @@ public class Factory {
 	
 		Empresa resultado = null;
 		
-		resultado = MinhaEmpresa(nome);
+		resultado = MinhaEmpresa();
 		
-		resultado.getNome();
 		
 		return resultado;
 	}
 	
+
 	public static Factory getInstancia() {
 		return instancia;
 	}
