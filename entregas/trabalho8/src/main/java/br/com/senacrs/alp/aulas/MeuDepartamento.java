@@ -1,14 +1,23 @@
 package br.com.senacrs.alp.aulas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeuDepartamento implements Departamento{
-
+	
+	
 	private String nome;
 	private Empresa empresa;
-	
+	ArrayList<Funcionario> lista = new ArrayList<Funcionario>();
 	
 	public MeuDepartamento(Empresa empresa, String nome){
+		
+		if(nome == null){
+			throw new IllegalArgumentException();
+		}
+		if(empresa == null){
+			throw new IllegalArgumentException();
+		}
 		
 		this.empresa = empresa;
 		this.nome = nome;
@@ -19,13 +28,13 @@ public class MeuDepartamento implements Departamento{
 	@Override
 	public Empresa getEmpresa() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.empresa;
 	}
 
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.nome;
 	}
 
 	@Override

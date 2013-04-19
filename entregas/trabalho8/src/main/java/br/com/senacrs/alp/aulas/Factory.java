@@ -8,10 +8,15 @@ public class Factory {
 	}
 	
 	public Funcionario criarFuncionario(Departamento departamento, String nome, double salario) {
-	
+		
+		if(departamento == null){
+			
+			throw new IllegalArgumentException();
+		}
+		
 		Funcionario resultado = null;
 		
-		resultado = new CriarMeuFuncionario(departamento, nome, salario);
+		resultado = new CriarMeuFuncionario(departamento.getEmpresa(), departamento, nome, salario);
 		
 		return resultado;
 	}
@@ -36,6 +41,11 @@ public class Factory {
 		return resultado;
 	}
 	
+
+	private Empresa MinhaEmpresa() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public static Factory getInstancia() {
 		return instancia;

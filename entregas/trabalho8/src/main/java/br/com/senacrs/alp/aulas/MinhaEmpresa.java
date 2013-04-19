@@ -1,21 +1,28 @@
 package br.com.senacrs.alp.aulas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MinhaEmpresa implements Empresa{
 
 	private String nome;
-	
+	ArrayList<Departamento> lista = new ArrayList<Departamento>();
 	
 	public MinhaEmpresa(String nome){
 		
+		if(nome == null){
+			throw new IllegalArgumentException();
+		}
 		this.nome = nome;
+		
+		
 	}
+	
 		
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.nome;
 	}
 
 	@Override
