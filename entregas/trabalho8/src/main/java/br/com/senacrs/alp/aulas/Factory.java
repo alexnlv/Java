@@ -22,7 +22,7 @@ public class Factory {
 	}
 	
 	public Departamento criarDepartamento(Empresa empresa, String nome) {
-	
+		
 		Departamento resultado = null;
 		
 		resultado = new MeuDepartamento(empresa, nome);

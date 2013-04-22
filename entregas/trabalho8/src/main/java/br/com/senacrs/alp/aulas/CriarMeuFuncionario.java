@@ -30,25 +30,25 @@ public class CriarMeuFuncionario implements Funcionario{
 	}
 	@Override
 	public Empresa getEmpresa() {
-		// TODO Auto-generated method stub
+		
 		return this.empresa;
 	}
 
 	@Override
 	public Departamento getDepartamento() {
-		// TODO Auto-generated method stub
+	
 		return this.departamento;
 	}
 
 	@Override
 	public String getNome() {
-		// TODO Auto-generated method stub
+	
 		return this.nome;
 	}
 
 	@Override
 	public double getSalario() {
-		// TODO Auto-generated method stub
+		
 		return this.salario;
 	}
 
