@@ -14,8 +14,6 @@ public class MeuleitordeArquivos implements LeitorArquivos {
 		
 		ArrayList<String> lista = new ArrayList<String>();
 		String str;
-		String[] resultado;
-		
 		
 		try {
 			 BufferedReader in = new BufferedReader(new FileReader(arquivo));
@@ -28,16 +26,12 @@ public class MeuleitordeArquivos implements LeitorArquivos {
 			 in.close();
 			 } catch (IOException e) {
 			 }
-
-		for (int i = 0; i < lista.size(); i++) {
-			
-			resultado = lista.subList(fromIndex, toIndex);
-			
-			
-		}		
 		
-				
-		return null;
+		
+		
+		String[] resultado = lista.toArray(new String[lista.size()]);
+						
+		return resultado;
 	}
 
 	@Override
