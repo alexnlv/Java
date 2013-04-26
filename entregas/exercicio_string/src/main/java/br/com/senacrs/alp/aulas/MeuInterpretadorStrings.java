@@ -56,7 +56,7 @@ public class MeuInterpretadorStrings implements InterpretadorStrings {
 	private boolean ehComentario(String str) {
 		
 		boolean resultado = false;
-		
+	
 		resultado = str.trim().startsWith(PREFIXO_COMENTARIO);
 		
 		return resultado;
