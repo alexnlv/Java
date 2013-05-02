@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MeuEmissorMensagens implements EmissorMensagens {
 
@@ -12,10 +14,16 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 	public String formatarMensagem(String chave, Object... argumentos) {
 		
 		String resultado = null;
-		testeDeString(chave);
+		testeChave(chave);
 		
+		Map<String, String> mapa = new HashMap<String, String>();
 		
+		mapa.put(chave);
 		
+		if (mapa.containsKey(chave)){
+			
+			throw new IllegalArgumentException();
+		}
 		
 		
 		
@@ -24,7 +32,7 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 		return resultado;
 	}
 
-	private void testeDeString(String str) {
+	private void testeChave(String str) {
 		
 		if (str == null) {
 			
