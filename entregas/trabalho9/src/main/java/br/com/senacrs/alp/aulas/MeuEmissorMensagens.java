@@ -14,13 +14,33 @@ import java.util.Map;
 public class MeuEmissorMensagens implements EmissorMensagens {
 	
 	
-	private String arquivoEntrada;
+	String arquivoEntrada;
 
 
 	public MeuEmissorMensagens(String arquivoEntrada) {
 		
 		this.arquivoEntrada = arquivoEntrada;
+		File file = obterFile(arquivoEntrada);
+		verificaFormato(file);
+	}
+
+	private File obterFile(String arquivo) {
 		
+		File resultado = null;
+
+		if(arquivo == null){
+
+			 throw new IllegalArgumentException();
+ 
+		}else{
+
+			 resultado = new File(arquivo);
+
+			 verificarFile(resultado);
+ 
+		}
+
+		 return resultado;
 	}
 
 	@Override
@@ -32,18 +52,19 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 		leitor = obterBufferedReader(arquivoEntrada);
 		linhas = lerBufferedReader(leitor);
 		
-		Map<String, String> mapa = null;
 		
-		for (int i = 0; i < linhas.length; i++) {
+		if (linhas[0].trim().equals(chave)){
 			
-			if(linhas[i].equals(chave)){
-				
-				mapa.put(chave, linhas[i].trim());
-			}
-			
+			resultado = String.format(linhas[1].trim(), argumentos);
 			
 		}
 		
+		else {
+			
+			throw new IllegalArgumentException();
+		}
+		
+	
 		return resultado;
 	}
 
@@ -52,33 +73,24 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 		
 		String[] resultado = null;
 		String linha = null;
-		ArrayList<String> lista = null;
-		
-		lista = new ArrayList<String>();
+				
 		
 		try {
 			
 			linha = leitor.readLine();
 			while (linha != null) {
 				
-				lista.add(linha);
+				resultado = linha.split("=");
 				linha = leitor.readLine();
-			}
+			}	
 			
-			resultado = converterListaArray(lista);
-			
+		leitor.close();	
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
 		
-		return resultado;
-	}
-
-
-	private String[] converterListaArray(ArrayList<String> lista) {
-		String[] resultado = null;
-		resultado = new String[lista.size()];
-		resultado = lista.toArray(resultado);
+		
+		
 		return resultado;
 	}
 
@@ -89,7 +101,7 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 		File file = null;
 		FileReader reader = null;
 		
-		file = obterFileLeitura(arquivoEntrada);
+		file = obterFile(arquivoEntrada);
 		
 		try {
 			
@@ -101,22 +113,39 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 			throw new IllegalStateException(e);
 		}
 		
+		
 		return resultado;
 	
 	}
 
 
-	private File obterFileLeitura(String arquivoEntrada) {
+	private void verificaFormato(File resultado) {
 		
-		File resultado = null;
+		try{
+			 
+			FileReader fr = new FileReader(resultado);
+
+			 BufferedReader br = new BufferedReader(fr);
+
+			
+ 
+			String a[] = br.readLine().split("=");
+
+			 if(a.length != 2){
+
+				 throw new IllegalArgumentException();
+ 
+			}
+			 
+			br.close(); 
+			 
+		 }catch(IOException e){
+
+			 e.printStackTrace();
+ 
+		}
 		
-		resultado = new File(arquivoEntrada);
-		verificarFile(resultado);
-		
-		return resultado;
 	}
-
-
 
 	private void verificarFile(File file) {
 		
