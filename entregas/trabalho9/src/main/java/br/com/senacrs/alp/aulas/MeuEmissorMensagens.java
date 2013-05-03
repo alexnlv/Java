@@ -32,9 +32,17 @@ public class MeuEmissorMensagens implements EmissorMensagens {
 		leitor = obterBufferedReader(arquivoEntrada);
 		linhas = lerBufferedReader(leitor);
 		
-		Map<String, String> mapa = new Map<String, String>();
+		Map<String, String> mapa = null;
 		
-		
+		for (int i = 0; i < linhas.length; i++) {
+			
+			if(linhas[i].equals(chave)){
+				
+				mapa.put(chave, linhas[i].trim());
+			}
+			
+			
+		}
 		
 		return resultado;
 	}
