@@ -8,10 +8,15 @@ public class Factory {
 	}
 	
 	public EmissorMensagens criarEmissor(String arquivoEntrada) {
-	
+		
+		if(arquivoEntrada == null){
+			 
+			throw new IllegalArgumentException();
+
+		 }
 		EmissorMensagens resultado = null;
 		
-		resultado = new MeuEmissorMensagens();
+		resultado = new MeuEmissorMensagens(arquivoEntrada);
 		
 		return resultado;
 	}

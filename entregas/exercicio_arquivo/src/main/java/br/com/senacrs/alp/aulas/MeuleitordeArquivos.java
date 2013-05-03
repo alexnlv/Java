@@ -80,8 +80,6 @@ public class MeuleitordeArquivos implements LeitorArquivos {
 	private File obterFileLeitura(String arquivo) {
 		
 		File resultado = null;
-		
-		verificarNomeArquivo(arquivo);
 		resultado = new File(arquivo);
 		verificarFile(resultado);
 		
@@ -112,13 +110,6 @@ public class MeuleitordeArquivos implements LeitorArquivos {
 		
 	}	
 	
-	private void verificarNomeArquivo(String arquivo) {
-		
-		
-		
-		
-		
-	}
 
 	@Override
 	public String[] lerArquivoComSubstituicao(String arquivo, String busca,
