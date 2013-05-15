@@ -14,6 +14,10 @@ public class Factory {
 			throw new IllegalArgumentException();
 
 		 }
+		
+		
+		
+		
 		EmissorMensagens resultado = null;
 		
 		resultado = new MeuEmissorMensagens(arquivoEntrada);

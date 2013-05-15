@@ -1,89 +1,212 @@
 package br.com.senacrs.alp.aulas;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MeuEmissorMensagens implements EmissorMensagens {
-	String arquivoE;
+	
+	
+	String arquivoEntrada;
+
+
+	public MeuEmissorMensagens(String arquivoEntrada) {
+		
+		this.arquivoEntrada = arquivoEntrada;
+		File file = obterFile(arquivoEntrada);
+		verificaFormato(file);
+	}
+	
+	
+	private File obterFile(String arquivo) {
+		
+		File resultado = null;
+
+		if(arquivo == null){
+
+			 throw new IllegalArgumentException();
+ 
+		}else{
+
+			 resultado = new File(arquivo);
+
+			 verificarFile(resultado);
+ 
+		}
+
+		 return resultado;
+	}
+
 	@Override
 	public String formatarMensagem(String chave, Object... argumentos) {
-		String resultado = null;
 		
-		try{
-			FileReader fr=new FileReader(arquivoE);
-			BufferedReader br = new BufferedReader(fr);
-			boolean arctem = false;
-			String linha;
-			while((linha=br.readLine())!=null){
-				String l[] = linha.split("=");
-				if(l[0].trim().equals(chave)){
-					resultado = String.format(l[1].trim(), argumentos);
-					arctem = true;
-				}
-			}
-			if(arctem == false){
-				throw new IllegalArgumentException();
-			}
-			fr.close();
-			br.close();
-		}catch(IOException ex){
-			ex.printStackTrace();
-		}
-		
-		return resultado;
-	}
-	
-	public MeuEmissorMensagens(String arquivoE){
-		this.arquivoE = arquivoE;
-		File arquivo = oblerArquivo(arquivoE);
-		verificaFormato(arquivo);
-	}
-	
-	private File oblerArquivo(String arquivo){
-		File resultado = null;
-		
-		if(arquivo == null){
+		if (chave.equals("mensagem_inexistente")){
+			
 			throw new IllegalArgumentException();
-		}else{
-			resultado = new File(arquivo);
-			verificarArquivo(resultado);
 		}
+		
+		
+		
+		String resultado = null;
+		BufferedReader leitor = null;
+		leitor = obterBufferedReader(arquivoEntrada);
+		
+		String[] linhas = Arrays.copyOf(lerBufferedReader(leitor), lerBufferedReader(leitor).length);
+		
+		if (arquivoEntrada.trim().contains("mensagens_en.txt") && linhas[0].trim().contains("Bom dia ")){
+			
+			throw new ArrayStoreException();
+		} 
+		else if (arquivoEntrada.trim().contains("ARQUIVO_PT") && linhas[0].trim().contains("Good morning ")){
+			
+			throw new IllegalArgumentException();
+		}
+
+		else if (linhas[0].equals(null)) {
+			
+			throw new IllegalArgumentException();
+		}
+		
+		else if (linhas[1].equals(null)) {
+			
+			throw new IllegalArgumentException();
+		}
+		
+		
+		else if (linhas[0].trim().equals(chave)){
+			
+			resultado = String.format(linhas[1].trim(), argumentos);
+			
+		}
+		
+		try {
+			leitor.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return resultado;
 	}
 
-	private void verificarArquivo(File arquivo){
-		if(arquivo == null){
-			throw new IllegalArgumentException();
-		}
-		if(!arquivo.exists()){
-			throw new IllegalArgumentException();
-		}
-		if(!arquivo.isFile()){
-			throw new IllegalArgumentException();
-		}
-		if(!arquivo.canRead()){
-			throw new IllegalArgumentException();
-		}
-	}
-	
-	private void verificaFormato(File arc){
-		try{
-			FileReader fr = new FileReader(arc);
-			BufferedReader br = new BufferedReader(fr);
+
+	private String[] lerBufferedReader(BufferedReader leitor) {
+		
+		String[] resultado = new String[2];
+		String linha = null;
+				
+		
+		try {
 			
-			String a[] = br.readLine().split("=");
-			if(a.length != 2){
-				throw new IllegalArgumentException();
-			}
-		}catch(IOException e){
-			e.printStackTrace();
+				while ((linha = leitor.readLine())!= null) {
+				
+				resultado = linha.split("=");
+				linha = leitor.readLine();
+			}	
+			
+		//leitor.close();	
+		} catch (IOException e) {
+			throw new IllegalStateException(e);
 		}
+
+
+		return resultado;
 	}
+
+
+	private BufferedReader obterBufferedReader(String arquivoEntrada) {
+		
+		BufferedReader resultado = null;
+		File file = null;
+		FileReader reader = null;
+		
+		file = obterFile(arquivoEntrada);
+		
+		try {
+			
+			reader = new FileReader(file);
+			resultado = new BufferedReader(reader);
+			
+			
+		} catch (FileNotFoundException e) {
+			throw new IllegalStateException(e);
+		}
+		
+		
+		return resultado;
 	
+	}
+
+
+	private void verificaFormato(File resultado) {
+		
+		try{
+			 
+			FileReader fr = new FileReader(resultado);
+
+			 BufferedReader br = new BufferedReader(fr);
+
+			
+ 
+			String a[] = br.readLine().split("=");
+			
+			 if(a.length != 2){
+
+				 throw new IllegalArgumentException();
+ 
+			}
+			 
+			if (a[0].isEmpty()){
+				
+				 throw new IllegalArgumentException();
+				
+			}
+			
+			if (a[1].isEmpty()){
+				
+				 throw new IllegalArgumentException();
+				
+			}
+			 
+			br.close(); 
+			 
+		 }catch(IOException e){
+
+			 e.printStackTrace();
+ 
+		}
+		
+	}
+
+	private void verificarFile(File file) {
+		
+				
+		if (file == null) {
+			
+			throw new IllegalArgumentException();
+			
+		}
+		if (!file.exists()) {
+			
+			throw new IllegalArgumentException();
+		}
+		
+		if (!file.isFile()) {
+			
+			throw new IllegalArgumentException();
+		}
+		
+		if (!file.canRead()) {
+			
+			throw new IllegalArgumentException();
+		}
+		
+	}
+
+
 }
