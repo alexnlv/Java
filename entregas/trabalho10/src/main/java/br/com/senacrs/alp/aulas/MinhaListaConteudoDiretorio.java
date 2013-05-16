@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MinhaListaConteudoDiretorio implements ListaConteudoDiretorio {
 
@@ -13,10 +15,34 @@ public class MinhaListaConteudoDiretorio implements ListaConteudoDiretorio {
 		
 		
 		
-		testarDiretorio(diretorio);
-		String[] resultado = lerDiretorio(diretorio);
+		File[] files = diretorio.listFiles();
+		String[] resultado = new String[files.length];
+		
+		for (int i = 0; i < files.length; i++) {
+			
+			File f = files[i];
+			
+			String res = ""
+					+ (f.isDirectory() ? ListaConteudoDiretorio.IDENTIFICA_DIRETORIO :ListaConteudoDiretorio.NADA_CONSTA)
+					+ ListaConteudoDiretorio.SEPARADOR
+					+ (f.canRead() ? ListaConteudoDiretorio.PERMISSAO_LEITURA : ListaConteudoDiretorio.NADA_CONSTA)
+					+ (f.canWrite() ? ListaConteudoDiretorio.PERMISSAO_ESCRITA : ListaConteudoDiretorio.NADA_CONSTA)
+					+ (f.canExecute() ? ListaConteudoDiretorio.PERMISSAO_EXECUCAO : ListaConteudoDiretorio.NADA_CONSTA);
+			
+			
+			
+		
+					
+			
+		}
 		
 		
+		
+		
+		
+		
+		/*testarDiretorio(diretorio);
+		String[] resultado = lerDiretorio(diretorio);		
 		
 		return resultado;
 	}
@@ -53,22 +79,14 @@ public class MinhaListaConteudoDiretorio implements ListaConteudoDiretorio {
 
 	private String[] lerDiretorio(File diretorio) {
 		
-		String[] resultado = new String[8];
-		int cont = 0;
+		File[] dir = diretorio.listFiles();
 		
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(diretorio));
-			while (in.ready()) {
-			resultado[cont] = in.readLine();
-			cont++;
-			}
-			in.close();
-		} catch (IOException e) {
-			
-			}
-
-			
+		String[] resultado = new String[dir.length];
 		
+		for (int i = 0; i < dir.length; i++) {
+			
+			resultado[i] = dir[i].toString();
+		}*/
 		
 		return resultado;
 	}
