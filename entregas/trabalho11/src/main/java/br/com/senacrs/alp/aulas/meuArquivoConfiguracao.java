@@ -2,10 +2,14 @@ package br.com.senacrs.alp.aulas;
 
 public class meuArquivoConfiguracao implements ArquivoConfiguracao {
 	
-	
+	private String arquivoEntrada = null;
 	
 	public meuArquivoConfiguracao(String arquivoEntrada) {
-		// TODO Auto-generated constructor stub
+		
+		this.arquivoEntrada = arquivoEntrada;
+		
+		
+		
 	}
 
 	@Override
