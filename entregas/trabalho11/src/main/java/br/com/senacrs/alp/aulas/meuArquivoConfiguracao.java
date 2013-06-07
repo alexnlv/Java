@@ -41,22 +41,11 @@ public class meuArquivoConfiguracao implements ArquivoConfiguracao {
 			while (linha != null) {
 				
 					if(ehComentario(linha)){
-						throw new IllegalArgumentException();
+						
 					}else{
 						contemComentario(linha);				
 					}
 					
-				
-					resultado = linha.split("=");
-					resultado[0] = resultado[0].trim();
-					resultado[1] = resultado[1].trim();
-					resultado[2] = resultado[2].trim();
-
-					armazenaChaveValor(resultado[0], resultado[1]);
-				
-					resultado[0] = null;
-					resultado[1] = null;
-
 			}
 		
 
@@ -73,7 +62,7 @@ public class meuArquivoConfiguracao implements ArquivoConfiguracao {
 	}
 
 	private void contemComentario(String linha) {
-		if(linha.contains("#") == true){
+		if(linha.contains("#")){
 			String l[] = linha.split("#");
 		}
 	}
