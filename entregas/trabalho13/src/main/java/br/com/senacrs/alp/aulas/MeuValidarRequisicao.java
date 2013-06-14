@@ -6,32 +6,43 @@ import java.io.Reader;
 
 public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		
-	private static final String GET = "GET / http/1.1";
-	private static final String HOST = "Host: www.google.com"; 
+	private static final String GET = "GET / http/1.1";// + MeuValidarRequisicao.NOVA_LINHA;
+	private static final String HOST = "Host: www."; 
+	private static final char[] get = GET.toCharArray();
+	private static String[] REQUISICAO = new String[] {
+		"GET / http/1.1" + ValidarRequisicaoGet.NOVA_LINHA,
+		"Host: www.google.com" + ValidarRequisicaoGet.NOVA_LINHA, };
 	
 	@Override
 	public boolean ehRequisicaoGetValida(Reader requisicao) {
 		
+		boolean resultado = false;
 		String[] linhas = new String[2];
 		
 		if (requisicao == null){
 			
 			throw new IllegalArgumentException();
-		}
 		
-		boolean resultado = false;
-		
-		linhas = lerReader(requisicao);
-		
-		if(linhas[1] == null){
+		} else if (requisicao.equals("")){
 			
 			resultado = false;
 		}
 		
-		else if(linhas[0].equals(GET) && linhas[1].equals(HOST)){
+		
+		
+		linhas = lerReader(requisicao);
+		
+		if (linhas.equals(REQUISICAO)){//(linhas[0].toString().equals(GET) && linhas[1].toString().startsWith(HOST)){
 			
 			resultado = true;
-		} 
+			System.out.println("entrou");
+			
+		}
+		
+		/*else if (linhas[0].toString().equals(GET) && linhas[1].toString().startsWith(HOST)){
+			
+			resultado = true;
+		}*/
 		
 	
 		
