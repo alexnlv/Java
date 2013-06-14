@@ -37,9 +37,10 @@ public class ValidarRequisicaoGetTest {
 
 	@Test
 	public void testEhRequisicaoGetValidaNullRequisicao() {
-
-		obj.ehRequisicaoGetValida(null);
+		
 		exception.expect(IllegalArgumentException.class);
+		obj.ehRequisicaoGetValida(null);
+		
 	}
 
 	@Test
