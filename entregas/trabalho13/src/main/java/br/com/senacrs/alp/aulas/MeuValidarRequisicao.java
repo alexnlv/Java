@@ -6,12 +6,10 @@ import java.io.Reader;
 import java.util.Arrays;
 
 public class MeuValidarRequisicao implements ValidarRequisicaoGet {
-		
-	private static final String GET = "GET / http/1.1\r\n";//+ MeuValidarRequisicao.NOVA_LINHA;
-	private static final String HOST = "Host: www.google.com\r\n";//+ MeuValidarRequisicao.NOVA_LINHA; 
-	private static String[] REQUISICAO = new String[] {
-		"GET / http/1.1" + ValidarRequisicaoGet.NOVA_LINHA,
-		"Host: www.google.com"+ ValidarRequisicaoGet.NOVA_LINHA};
+	
+	private static String PWD = System.getProperty("user.dir");
+	private static final String GET = "GET / http/1.1";//+ MeuValidarRequisicao.NOVA_LINHA;
+	private static final String HOST = "Host: www.google.com";//+ MeuValidarRequisicao.NOVA_LINHA; 
 	
 	@Override
 	public boolean ehRequisicaoGetValida(Reader requisicao) {
@@ -38,21 +36,7 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		
 		}
 		
-		/*if (linhas.length > 1){
-		
-			if ( (linhas[0].equals(GET) && linhas[1].equals(HOST))/*&&(REQUISICAO.length == linhas.length)){
-			
-				resultado = true;
-				System.out.println("entrou");
-			
-			} 
-		}
-		
-		else {
-				
-				resultado = false;
-		}*/
-			
+					
 		return resultado;
 	}
 
@@ -62,10 +46,14 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		int contador = 0;
 		boolean parcial1 = false;
 		boolean parcial2 = false;
-		int teste1, teste2 = 0;
+		int teste1 = 0;
+		int teste2 = 0;
 		
 	
 		for(int i = 0; i < get.length(); i++){ 
+			
+			teste1 = get.length();
+			teste2 = GET.length();
 			
 			if((GET.length() >= get.length()) && (get.charAt(i) == GET.charAt(i))){
 				
@@ -100,9 +88,14 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 			parcial2 = true;
 		}
 		
+		if((host.indexOf("\r") > -1) || (host.indexOf("\n") > -1)) {
+			
+			resultado = true;
+		}
 		
-		if(parcial1 && parcial2){ /*&& ((get.indexOf("\r") > -1) || (get.indexOf("\n") > -1) ) && ((host.indexOf("\r") > -1) || (host.indexOf("\n") > -1) )){
-			*/
+		
+		if(parcial1 && parcial2) /*((get.indexOf("\r") > -1) || (get.indexOf("\n") > -1) ) && ((host.indexOf("\r") > -1) || (host.indexOf("\n") > -1) )){
+		*/{	
 			resultado  = true;
 		}
 		
