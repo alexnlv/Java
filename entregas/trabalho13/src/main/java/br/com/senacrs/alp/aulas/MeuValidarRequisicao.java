@@ -8,16 +8,19 @@ import java.util.Arrays;
 public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 	
 	private static String PWD = System.getProperty("user.dir");
-	private static final String GET = "GET / http/1.1";//+ MeuValidarRequisicao.NOVA_LINHA;
-	private static final String HOST = "Host: www.google.com";//+ MeuValidarRequisicao.NOVA_LINHA; 
+	private static final String GET = "GET";
+	private static final String HOST = "Host:"+ MeuValidarRequisicao.NOVA_LINHA; 
+	private static final String LINHA_BRANCO = " ";
+	private static final Object BARRA = "/";
+	
 	
 	@Override
 	public boolean ehRequisicaoGetValida(Reader requisicao) {
 		
 		boolean resultado = false;
-		String[] linhas = new String[2];
-		String get = null;
-		String host = null;
+		StringBuilder builder = new StringBuilder();
+		String texto = null;
+		String [] linhas;
 		
 		if (requisicao == null){
 			
@@ -25,15 +28,21 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		}
 	
 		
-		linhas = lerReader(requisicao);
 		
-		get = linhas[0];
-		host = linhas[1];
 		
-		if( (get != null) && (host != null)){
+		try {
+			texto = lerReader(requisicao);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new IllegalArgumentException(e);
+		}
+		
+		linhas = texto.split(NOVA_LINHA);
+		
+		if(linhas.length == 2){
 			
-		  resultado = testarGetHost(get, host);
-		
+			resultado = testarGetHost(linhas[0], linhas[1]);
+			
 		}
 		
 					
@@ -46,79 +55,52 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		int contador = 0;
 		boolean parcial1 = false;
 		boolean parcial2 = false;
-		int teste1 = 0;
-		int teste2 = 0;
-		
 	
-		for(int i = 0; i < get.length(); i++){ 
+		
+		
+		String[] testaGet = get.split(LINHA_BRANCO);
 			
-			teste1 = get.length();
-			teste2 = GET.length();
+		if (testaGet.length == 3){
 			
-			if((GET.length() >= get.length()) && (get.charAt(i) == GET.charAt(i))){
+			if(testaGet[0].startsWith(GET)){
 				
-				teste1 = get.length();
-				teste2 = GET.length();
-				contador++;
-			}			
+				if(testaGet[1].trim().equals(BARRA)) {
+									
+					parcial1 = true;
+				}
+			}	
 		}
 		
-		if (contador == GET.length()){
-			
-			parcial1 = true;
+		
+		if (host.startsWith(HOST)){
+						
+				parcial2 = true;
 		}
 		
-		contador = 0;
-		
-		for(int x = 0; x < host.length(); x++){ 
-			
-			if((HOST.length() >= get.length())&&(host.charAt(x) == HOST.charAt(x))){
-				
-				teste1 = host.length();
-				teste2 = HOST.length();
-				
-				
-				
-				contador++;
-			}		
-		}
-		
-		if (contador == HOST.length()){
-			
-			parcial2 = true;
-		}
-		
-		if((host.indexOf("\r") > -1) || (host.indexOf("\n") > -1)) {
+		if(parcial1 && parcial2){
 			
 			resultado = true;
-		}
-		
-		
-		if(parcial1 && parcial2) /*((get.indexOf("\r") > -1) || (get.indexOf("\n") > -1) ) && ((host.indexOf("\r") > -1) || (host.indexOf("\n") > -1) )){
-		*/{	
-			resultado  = true;
 		}
 		
 		return resultado;
 	}
 
-	private String[] lerReader(Reader requisicao) {
+	private String lerReader(Reader requisicao) throws IOException {
 		
-		String [] resultado = new String[2];
-		BufferedReader buffer = new BufferedReader(requisicao);
+		//String [] resultado = new String[2];
+		StringBuilder resultado = new StringBuilder();
+		int i = requisicao.read();
+		Character c;
 		
-		try {
 		
-			resultado[0] = buffer.readLine();
-			resultado[1] = buffer.readLine();
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			throw new IllegalArgumentException(e);
+		while(i != -1){
+			
+			c = (char)i;
+			resultado.append(c);
+			i = requisicao.read();
 		}
 		
-		
-		return resultado;
+		return resultado.toString();
 	}
 
 }
