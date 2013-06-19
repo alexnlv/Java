@@ -11,7 +11,7 @@ public class Factory {
 	
 		ObterPathRequisicaoGet resultado = null;
 		
-		//implementar
+		resultado = new meuCriarValidacao();
 		
 		return resultado;
 	}

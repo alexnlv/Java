@@ -49,7 +49,7 @@ public class ObterPathRequisicaoGetTest {
 		String abs = null;
 
 		path = "/";
-		abs = PWD + path.replaceAll("/", File.separator);
+		abs = PWD + path.replace("/", File.separator);
 		requisicao = getRequisicao(path);
 		resultado = obj.caminhoAbsoluto(requisicao);
 		Assert.assertEquals(path, abs, resultado);
@@ -107,7 +107,7 @@ public class ObterPathRequisicaoGetTest {
 		String abs = null;
 
 		path = "/algo";
-		abs = PWD + path.replaceAll("/", File.separator);
+		abs = PWD + path.replace("/", File.separator);
 		requisicao = getRequisicao(path);
 		resultado = obj.caminhoAbsoluto(requisicao);
 		Assert.assertEquals(path, abs, resultado);
