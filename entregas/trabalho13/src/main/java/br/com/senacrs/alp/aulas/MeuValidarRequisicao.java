@@ -9,7 +9,7 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 	
 	private static String PWD = System.getProperty("user.dir");
 	private static final String GET = "GET";
-	private static final String HOST = "Host:"+ MeuValidarRequisicao.NOVA_LINHA; 
+	private static final String HOST = "Host:"; 
 	private static final String LINHA_BRANCO = " ";
 	private static final Object BARRA = "/";
 	
@@ -25,6 +25,10 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		if (requisicao == null){
 			
 			throw new IllegalArgumentException();
+		} else {
+			
+			resultado = false;
+			
 		}
 	
 		
@@ -39,12 +43,14 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		
 		linhas = texto.split(NOVA_LINHA);
 		
-		if(linhas.length == 2){
-			
-			resultado = testarGetHost(linhas[0], linhas[1]);
-			
-		}
+		if(linhas != null){
 		
+			if(linhas.length == 2){
+			
+				resultado = testarGetHost(linhas[0], linhas[1]);
+			
+			}
+		}
 					
 		return resultado;
 	}
@@ -73,8 +79,13 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		
 		
 		if (host.startsWith(HOST)){
-						
+			
+			if(host.contains("www")){
+				
 				parcial2 = true;
+			}
+						
+				
 		}
 		
 		if(parcial1 && parcial2){
@@ -88,7 +99,8 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 	private String lerReader(Reader requisicao) throws IOException {
 		
 		//String [] resultado = new String[2];
-		StringBuilder resultado = new StringBuilder();
+		StringBuilder res = new StringBuilder();
+		String resultado = null;
 		int i = requisicao.read();
 		Character c;
 		
@@ -96,11 +108,19 @@ public class MeuValidarRequisicao implements ValidarRequisicaoGet {
 		while(i != -1){
 			
 			c = (char)i;
-			resultado.append(c);
+			res.append(c);
 			i = requisicao.read();
 		}
 		
-		return resultado.toString();
+		if(res.toString().endsWith(NOVA_LINHA)){
+			
+			resultado = res.toString();
+		} else {
+			
+			resultado = "erro";
+		}
+		
+		return resultado;
 	}
 
 }
